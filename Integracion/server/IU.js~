@@ -1,0 +1,25 @@
+empezarPartida = function(id_partida, arrayJug, user_Id) {
+   
+    
+    console.log("user_ID: " + id_partida); 
+    console.log("user_ID: " + user_Id); 
+    
+    Turno.remove({});
+    
+    Turno.insert({Comando: "EmpezarPartida",
+                  id_Partida : id_partida,
+                  Jugadores: arrayJug,
+                  User_id: user_Id,
+                  nombrePieza: "",
+                  rotacion: false,
+                  numRotacion: 0,
+		  posx: 0,
+		  posy: 0,
+		  posxseg: 0,
+		  posyseg:0,
+		  scroll: false,
+		  ladoscroll: "",
+		  contador: 0});
+                  
+    console.log("insertado EmpiezaPartida"); 
+}
