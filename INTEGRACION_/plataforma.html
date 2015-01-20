@@ -1,0 +1,222 @@
+<head> 
+ <script src='client/game.js'></script>
+ <script src='client/engine.js'></script>
+ <link rel="stylesheet" href="base.css" type="text/css" />
+
+  <style>
+body {
+         background-image: url("images/fondo.png");
+}
+
+  </style>
+</head>
+
+    
+
+<body>
+
+    <div id="banner">
+       <img src="images/logobanner.png">    
+   </div>
+
+ <div id="navegacion">
+       <div id="menu-login">
+           <!--<div id='partida' style= "position:relative;"></div>-->
+
+           <div id="signin">
+               {{> loginButtons }}
+           </div>
+
+           <div class="btn-group-vertical" id='menu'>      
+               {{> menu_bar}}
+           </div>
+           <div id='messages'>
+                      {{> chat}}
+               </div>        
+
+       </div>
+
+       <div id="tablero">
+          <canvas id='game' width='1150' height='600'></canvas>        
+       </div>
+       
+       <div id='waiting_matches' style= "position:center;" class="jumbotron">
+                    <div>                
+                            {{> draw_matches}}
+                     {{> options}}                
+                    </div>
+        </div>            
+               
+       <div id='container' class="span7">
+             {{> alien_invasion}}      
+       </div>
+
+           
+
+      <div id="gamecontainer" class="span7" style="display: block; margin: 10px 10px 5px 90px; border-left-width: 0px; padding-left: 0px; width: 640px;">
+                 {{> froot_wars}}      
+           </div>
+
+   </div>
+</body>
+
+
+
+
+<template name="menu_bar">
+    <button type="button" class="btn btn-default tamano" id="CC_button">Carcassonne</button>
+    
+    <button type="button" class="btn btn-default tamano" id="New_G">New Game</button> 
+  
+    <button type="button" class="btn btn-default tamano" id="FW_button">FrootWars</button>
+    
+    <button type="button" class="btn btn-default tamano" id="AI_button">AlienInvasion</button>                 
+</template>
+
+
+
+<template name="options">
+    <div id='game_features'>
+        <button class="close_Div" style="float: right" id="close_options">Close</button>
+        <p><label>Nombre de la partida</label><input type="text" size="30" id="nombre" /></p>
+        <hr>
+            <label>Número de Jugadores </label><br>
+            <input type="radio" name="n_players" value="2" checked> 2
+            <input type="radio" name="n_players" value="3"> 3
+            <input type="radio" name="n_players" value="4"> 4
+            <input type="radio" name="n_players" value="5"> 5
+        <hr>
+        <td colspan="2">
+            <p><a class="btn btn-primary btn-lg" id="start_game" role="button">Crear</a></p>
+        </td>
+    </div>
+
+    <div id='waiting_for_players' class="jumbotron breadcrumb" >
+        <h1>Esperando jugadores</h1>               
+        <td colspan="2">
+            <button class="btn btn-primary btn-lg" id="wait_start">Empezar</button>                        
+        </td>
+        <td colspan="2">
+            <button class="btn btn-primary btn-lg" id="wait_cancel">Cancelar</button> 
+        </td>
+    </div>
+</template>
+
+
+<template name="chat">
+    {{#if none }}
+        <h3> Chat General </h3>
+    {{else}}
+        <h3> Chat {{gameName}} </h3>
+    {{/if}}
+  
+    {{> input    }}
+    {{> chat_messages }}
+</template>
+
+<template name="puntuaciones">
+       <table id="scores" class="table table-striped">  
+       <tbody>
+       {{#each scores}}
+           <tr>
+              <td><strong>{{name}}</strong> ({{game}}): </td>
+                                       <td>{{points}}</td>
+           </tr>
+       {{/each}}
+       </tbody>
+   </table>
+</template>
+
+<template name="input">
+    <p>Message: <input type="text" id="message"></p>
+
+    <div class="alert fade in" id="login-error" style="display:none;">
+        <button type="button" class="close">x</button>
+        You must be signed in to post messages.
+    </div>
+</template>
+
+
+<template name="chat_messages">
+    <table id="rooms" class="table table-striped">  
+        <tbody>
+        {{#each messages}}
+            <tr>
+                <td><strong>{{name}}:</strong></td>
+                <td>{{message}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+
+<template name="draw_matches">
+    <div id='display_matches'>    
+        {{#each matches_Wait}}
+        <ol class="breadcrumb estilopartida">
+            <li id= "match_name">{{nombre_partida}}</li>
+            <li>|</li>
+            <span class="glyphicon glyphicon-user">: </span>        
+            <li id= "match_players">{{num_jug}}</li>
+            <li>| Host: </li>                         
+            <li id= "match_owner">{{propietario}}</li>
+            <button id={{nombre_partida}}&{{num_jug}} type="button" class="btn btn-default play_game_button">&nbsp;▶</button>             
+        </ol>
+        {{/each}}    
+    </div>
+
+    <div id='player_joined'>    
+        <ol class="breadcrumb estilopartida">
+            <li id= "Status">Te has unido a una partida</li> 
+        </ol> 
+    </div>
+
+    <div id='display_match_started'>    
+        <ol class="breadcrumb estilopartida">
+            <li id= "Status">Empezada!!</li>
+            <button type="button" class="btn btn-default play_game">Terminar Partida??</button>             
+        </ol>
+    </div>
+</template>
+
+<template name="join_match"></template>
+
+
+<template name="froot_wars">
+    <canvas id="gamecanvas" width="640" height="480" class="gamelayer"></canvas>
+  
+    <div id="scorescreen" class="gamelayer">
+        <img id="togglemusic" src="images/icons/sound.png" onclick="game.toggleBackgroundMusic();">
+        <img src="images/icons/prev.png" onclick="game.restartLevel();">
+        <span id="score">Score: 0</span>
+    </div>
+  
+    <div id="gamestartscreen" class="gamelayer">
+        <img src="images/icons/play.png" alt="Play Game" onclick = "game.showLevelScreen();"><br>
+        <img src="images/icons/settings.png" alt="Settings">
+    </div>
+  
+    <div id="levelselectscreen" class="gamelayer"></div>
+  
+    <div id="loadingscreen" class="gamelayer">
+        <div id="loadingmessage"></div>
+    </div>
+  
+    <div id="endingscreen" class="gamelayer">
+        <div>
+          <p id="endingmessage">The Level Is Over Message</p>
+          <p id="playcurrentlevel" onclick="game.restartLevel();"><img src="images/icons/prev.png"> Replay Current Level</p>
+          <p id="playnextlevel" onclick="game.startNextLevel();"><img src="images/icons/next.png"> Play Next Level </p> 
+          
+          <p id="returntolevelscreen" onclick="game.showLevelScreen();"><img src="images/icons/return.png"> Return to Level Screen</p>
+        </div>
+    </div>
+</template>
+
+
+<template name="alien_invasion">
+    <canvas id='game' width='320' height='480'></canvas>
+</template>
+
+

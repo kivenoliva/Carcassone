@@ -1,0 +1,144 @@
+/* Center the container */
+#partida {
+  margin-top:120px;
+  margin-left:200px;
+  width:480px;
+}
+
+#messages {
+  position: relative;
+  float: left;
+  margin-top:5px;
+  margin-left:0px;
+  width: 220px;
+}
+
+/* Give canvas a background */
+
+
+#tablero {
+  background-color:black;
+}
+
+
+#chat{  
+ border-style: solid;
+ border-width: 5px;
+ background-color:blue;
+}
+
+#fondo:hover{
+
+ background-color: grey;
+ width: 400px;
+
+}
+
+#menu{
+ position: relative;
+ float: left;
+} 
+
+#game_features{
+ background: white;
+ padding:100px;
+}
+
+#start_game{
+    margin-left: 80%;
+}
+
+#banner{
+    border-radius: 4px;
+    position: relative;
+    width:100%
+    height:1000px;
+    background: red;
+    border-style: solid;
+    border-width: 5px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /*height: 188px;*/
+}
+
+#waiting_matches{
+ position:relative;
+ border-style: solid;
+ border-width: 5px;
+ float:left;
+ border: 2px solid black; 
+ background: red;
+ border-radius: 4px;
+ width:80%;
+ height:650px;
+ 
+}
+
+#navegacion{
+ width: 100%;
+ position:relative;
+ float:left;
+ padding:10px;
+ overflow:hidden;
+}
+
+#menu-login{
+ width: 18%;
+ position:relative;
+ float:left;
+}
+
+.btn-group-vertical{
+ position:relative;
+ float:left;
+ display:inline-block;
+}
+
+#game_features{
+ width: 30%;
+ height: 20%   
+}
+#rooms{
+ width: 150px;
+}
+.play_game{
+ border: 2px solid #003B62;
+ position: relative;
+ float: right;
+ background: #00FFFF;
+}
+
+.tamano {
+ width: 218px;
+ height: 40px;
+ color: #A0522D;
+}
+
+.estilopartida{
+ padding: 20px;
+};
+
+#login-buttons{
+ display: block;
+}
+
+#wait_start{
+ position:relative;
+ float: right;
+}
+
+#wait_cancel{
+ position:relative;
+ float: left;
+}
+#tablero {
+ background-color:black;
+ width:1150px;
+ height:600px;
+ margin-left:260px;
+}
+#waiting_for_players{
+ padding:100px
+ width:200px;
+ height:100px;
+} }
